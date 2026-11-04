@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import heroImage from '../../assets/img/team/services.jpg'
 import aboutImage from '../../assets/img/team/about.jpg'
 import partnerOne from '../../assets/img/team/team1.jpg'
@@ -97,7 +97,7 @@ const testimonials = [
   },
 ]
 
-function ArrowIcon({ diagonal = true }) {
+function ArrowIcon({ diagonal = false }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 20 20" className="arrow-icon">
       {diagonal ? (
@@ -111,7 +111,7 @@ function ArrowIcon({ diagonal = true }) {
 
 function Brand({ light = false }) {
   return (
-    <a className={`brand${light ? ' brand-light' : ''}`} href="#home" aria-label="ApexFintax home">
+    <a className={`brand${light ? ' brand-light' : ''}`} href="/" aria-label="ApexFintax home">
       <span className="brand-mark" aria-hidden="true">
         <i />
         <i />
@@ -150,7 +150,172 @@ function ServiceIcon({ name }) {
   )
 }
 
-function App() {
+function AccountingTaxPage() {
+  const accountingOfferings = [
+    {
+      image: projectOne,
+      imageAlt: 'Insurance documents and a calculator on a desk',
+      title: 'Accounting & reporting',
+      description: 'Reliable books and management reports that give you a clear view of performance and cash flow.',
+      items: ['Bookkeeping & month-end close', 'Management accounts', 'Financial statement preparation'],
+    },
+    {
+      image: projectTwo,
+      imageAlt: 'A team discussing plans around a table',
+      title: 'Tax planning & compliance',
+      description: 'Practical tax support that helps you meet deadlines, manage exposure, and plan with confidence.',
+      items: ['Corporate and individual tax', 'VAT and withholding tax', 'Returns, filings & compliance'],
+    },
+    {
+      image: projectThree,
+      imageAlt: 'Business professionals gathered around a conference table with laptops',
+      title: 'Payroll & business support',
+      description: 'Day-to-day finance support that gives your team more time to focus on running the business.',
+      items: ['Payroll processing', 'Statutory deductions', 'Finance process improvement'],
+    },
+  ]
+
+  return (
+    <div className="accounting-page">
+      <header className="accounting-page-header">
+        <div className="utility-bar">
+          <div className="utility-inner">
+            <div className="utility-details">
+              <a href="tel:+254791302316"><span aria-hidden="true">☎</span> +254 791 302 316</a>
+              <a href="mailto:hello@apexfintax.co.ke"><span aria-hidden="true">✉</span> hello@apexfintax.co.ke</a>
+              <span><span aria-hidden="true">◷</span> Mon–Fri, 8:00–17:00</span>
+            </div>
+            <div className="social-links" aria-label="Social media">
+              <span>Follow us</span>
+              <a href="mailto:hello@apexfintax.co.ke" aria-label="LinkedIn">in</a>
+              <a href="mailto:hello@apexfintax.co.ke" aria-label="X">X</a>
+              <a href="mailto:hello@apexfintax.co.ke" aria-label="Facebook">f</a>
+            </div>
+          </div>
+        </div>
+        <div className="navigation-wrap">
+          <div className="navigation-inner">
+            <Brand />
+            <nav className="accounting-navigation" aria-label="Main navigation">
+              <a href="/#home">Home</a>
+              <a href="/#about">About</a>
+              <a className="active" href="/#services">Services</a>
+              <a href="/#team">Our team</a>
+            </nav>
+            <a className="button button-dark header-cta" href="mailto:hello@apexfintax.co.ke">
+              Talk to an expert <ArrowIcon diagonal />
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section className="accounting-hero">
+          <div className="accounting-hero-copy">
+            <a className="accounting-back-link" href="/#services"><ArrowIcon /> All services</a>
+            <p className="eyebrow"><span /> Accounting & tax</p>
+            <h1>Know your numbers.<br /><em>Move with confidence.</em></h1>
+            <p className="hero-description">
+              From everyday bookkeeping to considered tax advice, we make the financial details easier to manage—and easier to act on.
+            </p>
+            <div className="hero-actions">
+              <a className="button button-dark" href="mailto:hello@apexfintax.co.ke">Let’s talk <ArrowIcon diagonal /></a>
+              <a className="text-link" href="#accounting-services">Explore our services <ArrowIcon /></a>
+            </div>
+            <div className="accounting-hero-caption">
+              <span className="accounting-caption-mark">01</span>
+              <span>Clear reporting. Thoughtful guidance.<br />Support built around your business.</span>
+            </div>
+          </div>
+          <div className="accounting-hero-visual">
+            <img src={heroImage} alt="Finance team collaborating over a laptop in a bright office" />
+            <div className="accounting-visual-note">
+              <span className="note-icon" aria-hidden="true">↗</span>
+              <p><strong>Clarity you can use.</strong><br />Good finance is a foundation for growth.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="accounting-intro section-shell">
+          <div className="section-kicker">Finance, made practical</div>
+          <div className="accounting-intro-content">
+            <h2>More than keeping the books.<br /><em>A partner in your progress.</em></h2>
+            <p>Every business deserves financial information it can trust. Our team brings dependable processes and straight-talking expertise to help you stay compliant, see what is changing, and make your next move with confidence.</p>
+          </div>
+        </section>
+
+        <section className="accounting-services" id="accounting-services">
+          <div className="section-shell">
+            <div className="section-heading">
+              <div>
+                <div className="section-kicker">How we can help</div>
+                <h2>The right support for <em>every number.</em></h2>
+              </div>
+              <p>Choose the support you need today, with room to grow as your business changes.</p>
+            </div>
+            <div className="accounting-offering-grid">
+              {accountingOfferings.map((offering, index) => (
+                <article className="accounting-offering" key={offering.title}>
+                  <div className="accounting-offering-photo">
+                    <img src={offering.image} alt={offering.imageAlt} loading="lazy" />
+                    <span>0{index + 1}</span>
+                  </div>
+                  <div className="accounting-offering-content">
+                    <h3>{offering.title}</h3>
+                    <p>{offering.description}</p>
+                    <ul>
+                      {offering.items.map((item) => <li key={item}><span aria-hidden="true">↗</span>{item}</li>)}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="accounting-approach section-shell">
+          <div className="accounting-approach-photo">
+            <img src={aboutImage} alt="Business owner reviewing financial information at a desk" loading="lazy" />
+            <span>Built around your business.</span>
+          </div>
+          <div className="accounting-approach-copy">
+            <div className="section-kicker">A better way to work</div>
+            <h2>Good advice starts with <em>listening.</em></h2>
+            <p>We get to know how your business works before recommending a way forward. You get a responsive team, clear answers, and no surprises about what happens next.</p>
+            <div className="accounting-steps">
+              <div><span>01</span><p><strong>Understand</strong> — your goals, systems, and current challenges.</p></div>
+              <div><span>02</span><p><strong>Make a plan</strong> — practical priorities and clear responsibilities.</p></div>
+              <div><span>03</span><p><strong>Keep improving</strong> — consistent support and useful insight over time.</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="accounting-cta">
+          <div className="section-shell accounting-cta-inner">
+            <div>
+              <div className="section-kicker">Let’s get started</div>
+              <h2>Make your next financial decision <em>with confidence.</em></h2>
+            </div>
+            <div>
+              <p>Tell us what you need help with. We’ll arrange a conversation and find the right next step for your business.</p>
+              <a className="button button-light" href="mailto:hello@apexfintax.co.ke">Book a consultation <ArrowIcon diagonal /></a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="accounting-page-footer">
+        <div className="section-shell">
+          <Brand light />
+          <p>Clear numbers. Confident decisions. Enduring value.</p>
+          <a href="/">Back to ApexFintax home <ArrowIcon /></a>
+        </div>
+      </footer>
+    </div>
+  )
+}
+
+function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const testimonial = testimonials[testimonialIndex]
@@ -269,7 +434,9 @@ function App() {
                   <ul>
                     {service.points.map((point) => <li key={point}><span aria-hidden="true">↗</span>{point}</li>)}
                   </ul>
-                  <a href="#contact" className="text-link">Explore service <ArrowIcon /></a>
+                  <a href={service.title === 'Accounting & tax' ? '/accounting-tax' : '#contact'} className="text-link">
+                    {service.title === 'Accounting & tax' ? 'Explore more' : 'Explore service'} <ArrowIcon />
+                  </a>
                 </article>
               ))}
             </div>
@@ -385,7 +552,7 @@ function App() {
             </div>
           </div>
           <div className="footer-column"><strong>Company</strong><a href="#about">About us</a><a href="#team">Our team</a><a href="#projects">Projects</a><a href="#contact">Careers</a></div>
-          <div className="footer-column"><strong>Expertise</strong><a href="#services">Accounting & tax</a><a href="#services">Business advisory</a><a href="#services">Risk & assurance</a><a href="#services">Data & analytics</a></div>
+          <div className="footer-column"><strong>Expertise</strong><a href="/accounting-tax">Accounting & tax</a><a href="#services">Business advisory</a><a href="#services">Risk & assurance</a><a href="#services">Data & analytics</a></div>
           <div className="footer-column footer-contact"><strong>Get in touch</strong><span>The Address, Muthangari Drive<br />Nairobi, Kenya</span><a href="tel:+254700480220">+254 700 480 220</a><a href="mailto:hello@apexfintax.co.ke">hello@apexfintax.co.ke</a></div>
         </div>
         <div className="footer-bottom section-shell">
@@ -395,6 +562,16 @@ function App() {
       </footer>
     </>
   )
+}
+
+function App() {
+  const isAccountingTax = window.location.pathname.replace(/\/+$/, '') === '/accounting-tax'
+
+  useEffect(() => {
+    document.title = isAccountingTax ? 'Accounting & Tax | ApexFintax' : 'ApexFintax | Finance. Clarity. Forward.'
+  }, [isAccountingTax])
+
+  return isAccountingTax ? <AccountingTaxPage /> : <HomePage />
 }
 
 export default App
